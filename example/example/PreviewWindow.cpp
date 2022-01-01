@@ -6,6 +6,9 @@
 PreviewWindow::PreviewWindow(QWidget *parent)
 	: QWidget(parent)
 {
+	MoniterWidth = GetSystemMetrics(SM_CXSCREEN);
+	MoniterHeight = GetSystemMetrics(SM_CYSCREEN);
+
 	imageLabel = new QLabel();
 
 	closeButton = new QPushButton(tr("&Close"));
@@ -23,6 +26,35 @@ PreviewWindow::PreviewWindow(QWidget *parent)
 	if (originalImage.data)
 	{
 		cv::cvtColor(originalImage, originalImage, cv::COLOR_BGR2RGB);
+
+
+
+		if (originalImage.rows > MoniterHeight)
+		{
+			long resize_hei = MoniterHeight * 0.8;
+			float ImageRatio = (float)resize_hei / originalImage.rows;
+			if (ImageRatio == 0)
+				ImageRatio = 1;
+
+			long resize_wid = originalImage.cols * ImageRatio;
+
+			if (resize_wid > MoniterWidth)
+			{
+				long reresize_wid = MoniterWidth * 0.8;
+				ImageRatio = (float)reresize_wid / originalImage.cols;
+				if (ImageRatio == 0)
+					ImageRatio = 1;
+
+				long reresize_hei = originalImage.rows * ImageRatio;
+
+				resize_wid = reresize_wid;
+				resize_hei = reresize_hei;
+			}
+
+			if(resize_wid != 0 && resize_hei != 0)
+				cv::resize(originalImage, originalImage, cv::Size(resize_wid, resize_hei), 0, 0);
+		}
+
 	}
 
 }

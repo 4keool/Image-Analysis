@@ -31,6 +31,11 @@ private:
 	cv::Mat originalImage;
 	cv::Mat processedImage;
 	QLabel *imageLabel;
+
+
+	long MoniterWidth;
+	long MoniterHeight;
+
 };
 
 

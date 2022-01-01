@@ -19,9 +19,12 @@ class ControllerWindow : public QWidget
 
 public:
 	ControllerWindow();
+	bool path;
 
 private slots:
 	void updatePreview();
+
+
 
 private:
 	void createTypeGroupBox();
@@ -35,6 +38,7 @@ private:
 	QRadioButton *img_original;
 	QRadioButton *img_gray;
 	QRadioButton *img_canny;
+
 
 
 };
