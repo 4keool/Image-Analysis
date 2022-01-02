@@ -137,6 +137,23 @@ namespace Image_Analysis
             SettingListView(e.Node);
         }
 
+        private void TAB1_PICTUREBOX_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (this.TAB1_PICTUREBOX.Image != null)
+            {
+                try
+                {
+                    Bitmap bitmap = new Bitmap(this.TAB1_PICTUREBOX.Image);
+                    Color color = bitmap.GetPixel(e.X, e.Y);
+                    this.TAB1_TEXTBOX_RGB.Location = new Point(e.X, e.Y);
+                    this.TAB1_TEXTBOX_RGB.Text = $"RED : {color.R} GREEN : {color.G} BLUE : {color.B}";
+                }
+                catch (Exception)
+                {
+                }
+            }
+        }
+
         private void TAB1_FILE_LISTVIEW_MouseClick(object sender, MouseEventArgs e)
         {
             string szFile = TAB1_FILE_EXPLORER_TREEVIEW.SelectedNode.FullPath + "\\" + TAB1_FILE_LISTVIEW.SelectedItems[0].Text;

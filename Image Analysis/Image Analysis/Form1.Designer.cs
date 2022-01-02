@@ -38,8 +38,9 @@ namespace Image_Analysis
             this.TAB1_FILE_EXPLORER_TREEVIEW = new System.Windows.Forms.TreeView();
             this.FILE_EXPLORER_IMAGELIST = new System.Windows.Forms.ImageList(this.components);
             this.TAB1_FILE_LISTVIEW = new System.Windows.Forms.ListView();
-            this.TAB1_PICTUREBOX = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.TAB1_PICTUREBOX = new System.Windows.Forms.PictureBox();
+            this.TAB1_TEXTBOX_RGB = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -87,6 +88,7 @@ namespace Image_Analysis
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.TAB1_TEXTBOX_RGB);
             this.splitContainer1.Panel2.Controls.Add(this.TAB1_PICTUREBOX);
             this.splitContainer1.Size = new System.Drawing.Size(1086, 666);
             this.splitContainer1.SplitterDistance = 362;
@@ -151,17 +153,6 @@ namespace Image_Analysis
             this.TAB1_FILE_LISTVIEW.UseCompatibleStateImageBehavior = false;
             this.TAB1_FILE_LISTVIEW.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TAB1_FILE_LISTVIEW_MouseClick);
             // 
-            // TAB1_PICTUREBOX
-            // 
-            this.TAB1_PICTUREBOX.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.TAB1_PICTUREBOX.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TAB1_PICTUREBOX.Location = new System.Drawing.Point(0, 0);
-            this.TAB1_PICTUREBOX.Name = "TAB1_PICTUREBOX";
-            this.TAB1_PICTUREBOX.Size = new System.Drawing.Size(720, 666);
-            this.TAB1_PICTUREBOX.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.TAB1_PICTUREBOX.TabIndex = 0;
-            this.TAB1_PICTUREBOX.TabStop = false;
-            // 
             // tabPage2
             // 
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
@@ -171,6 +162,24 @@ namespace Image_Analysis
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // TAB1_PICTUREBOX
+            // 
+            this.TAB1_PICTUREBOX.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.TAB1_PICTUREBOX.Location = new System.Drawing.Point(0, 0);
+            this.TAB1_PICTUREBOX.Name = "TAB1_PICTUREBOX";
+            this.TAB1_PICTUREBOX.Size = new System.Drawing.Size(720, 635);
+            this.TAB1_PICTUREBOX.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.TAB1_PICTUREBOX.TabIndex = 0;
+            this.TAB1_PICTUREBOX.TabStop = false;
+            this.TAB1_PICTUREBOX.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TAB1_PICTUREBOX_MouseMove);
+            // 
+            // TAB1_TEXTBOX_RGB
+            // 
+            this.TAB1_TEXTBOX_RGB.Location = new System.Drawing.Point(289, 325);
+            this.TAB1_TEXTBOX_RGB.Name = "TAB1_TEXTBOX_RGB";
+            this.TAB1_TEXTBOX_RGB.Size = new System.Drawing.Size(100, 23);
+            this.TAB1_TEXTBOX_RGB.TabIndex = 1;
             // 
             // Form1
             // 
@@ -185,6 +194,7 @@ namespace Image_Analysis
             this.tabPage1.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
@@ -204,9 +214,10 @@ namespace Image_Analysis
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.TreeView TAB1_FILE_EXPLORER_TREEVIEW;
         private System.Windows.Forms.ListView TAB1_FILE_LISTVIEW;
-        private System.Windows.Forms.PictureBox TAB1_PICTUREBOX;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ImageList FILE_EXPLORER_IMAGELIST;
+        private System.Windows.Forms.TextBox TAB1_TEXTBOX_RGB;
+        private System.Windows.Forms.PictureBox TAB1_PICTUREBOX;
     }
 }
 
