@@ -38,9 +38,10 @@ namespace Image_Analysis
             this.TAB1_FILE_EXPLORER_TREEVIEW = new System.Windows.Forms.TreeView();
             this.FILE_EXPLORER_IMAGELIST = new System.Windows.Forms.ImageList(this.components);
             this.TAB1_FILE_LISTVIEW = new System.Windows.Forms.ListView();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.TAB1_PICTUREBOX = new System.Windows.Forms.PictureBox();
             this.TAB1_TEXTBOX_RGB = new System.Windows.Forms.TextBox();
+            this.TAB1_PICTUREBOX = new System.Windows.Forms.PictureBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.TAB1_CONTEXTMENUSTRIP = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -127,6 +128,7 @@ namespace Image_Analysis
             this.TAB1_FILE_EXPLORER_TREEVIEW.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.TAB1_FILE_EXPLORER_TREEVIEW_BeforeCollapse);
             this.TAB1_FILE_EXPLORER_TREEVIEW.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.TAB1_FILE_EXPLORER_TREEVIEW_BeforeExpand);
             this.TAB1_FILE_EXPLORER_TREEVIEW.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TAB1_FILE_EXPLORER_TREEVIEW_NodeMouseClick);
+            this.TAB1_FILE_EXPLORER_TREEVIEW.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TAB1_FILE_EXPLORER_TREEVIEW_MouseClick);
             // 
             // FILE_EXPLORER_IMAGELIST
             // 
@@ -153,15 +155,15 @@ namespace Image_Analysis
             this.TAB1_FILE_LISTVIEW.UseCompatibleStateImageBehavior = false;
             this.TAB1_FILE_LISTVIEW.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TAB1_FILE_LISTVIEW_MouseClick);
             // 
-            // tabPage2
+            // TAB1_TEXTBOX_RGB
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1092, 672);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.TAB1_TEXTBOX_RGB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TAB1_TEXTBOX_RGB.Location = new System.Drawing.Point(289, 325);
+            this.TAB1_TEXTBOX_RGB.Name = "TAB1_TEXTBOX_RGB";
+            this.TAB1_TEXTBOX_RGB.ReadOnly = true;
+            this.TAB1_TEXTBOX_RGB.Size = new System.Drawing.Size(90, 16);
+            this.TAB1_TEXTBOX_RGB.TabIndex = 1;
+            this.TAB1_TEXTBOX_RGB.TabStop = false;
             // 
             // TAB1_PICTUREBOX
             // 
@@ -174,12 +176,21 @@ namespace Image_Analysis
             this.TAB1_PICTUREBOX.TabStop = false;
             this.TAB1_PICTUREBOX.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TAB1_PICTUREBOX_MouseMove);
             // 
-            // TAB1_TEXTBOX_RGB
+            // tabPage2
             // 
-            this.TAB1_TEXTBOX_RGB.Location = new System.Drawing.Point(289, 325);
-            this.TAB1_TEXTBOX_RGB.Name = "TAB1_TEXTBOX_RGB";
-            this.TAB1_TEXTBOX_RGB.Size = new System.Drawing.Size(100, 23);
-            this.TAB1_TEXTBOX_RGB.TabIndex = 1;
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1092, 672);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // TAB1_CONTEXTMENUSTRIP
+            // 
+            this.TAB1_CONTEXTMENUSTRIP.Name = "TAB1_CONTEXTMENUSTRIP";
+            this.TAB1_CONTEXTMENUSTRIP.Size = new System.Drawing.Size(181, 26);
+            this.TAB1_CONTEXTMENUSTRIP.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.TAB1_CONTEXTMENUSTRIP_ItemClicked);
             // 
             // Form1
             // 
@@ -218,6 +229,7 @@ namespace Image_Analysis
         private System.Windows.Forms.ImageList FILE_EXPLORER_IMAGELIST;
         private System.Windows.Forms.TextBox TAB1_TEXTBOX_RGB;
         private System.Windows.Forms.PictureBox TAB1_PICTUREBOX;
+        private System.Windows.Forms.ContextMenuStrip TAB1_CONTEXTMENUSTRIP;
     }
 }
 

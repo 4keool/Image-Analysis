@@ -137,6 +137,21 @@ namespace Image_Analysis
             SettingListView(e.Node);
         }
 
+        private void DelayManual(int iDelay)
+        {
+            DateTime ThisMoment = DateTime.Now;
+            TimeSpan duration = new TimeSpan(0, 0, 0, 0, iDelay * 1000);
+
+            DateTime AfterTime = ThisMoment.Add(duration);
+            while(true)
+            {
+                ThisMoment = DateTime.Now;
+                System.Windows.Forms.Application.DoEvents();
+
+                if (AfterTime <= ThisMoment) break;
+            }
+        }
+
         private void TAB1_PICTUREBOX_MouseMove(object sender, MouseEventArgs e)
         {
             if (this.TAB1_PICTUREBOX.Image != null)
@@ -146,7 +161,10 @@ namespace Image_Analysis
                     Bitmap bitmap = new Bitmap(this.TAB1_PICTUREBOX.Image);
                     Color color = bitmap.GetPixel(e.X, e.Y);
                     this.TAB1_TEXTBOX_RGB.Location = new Point(e.X, e.Y);
-                    this.TAB1_TEXTBOX_RGB.Text = $"RED : {color.R} GREEN : {color.G} BLUE : {color.B}";
+                    this.TAB1_TEXTBOX_RGB.Text = $"R : {color.R} G : {color.G} B : {color.B}";
+                    this.TAB1_TEXTBOX_RGB.Width = this.TAB1_TEXTBOX_RGB.PreferredSize.Width;
+
+                    DelayManual(5000);
                 }
                 catch (Exception)
                 {
@@ -156,12 +174,33 @@ namespace Image_Analysis
 
         private void TAB1_FILE_LISTVIEW_MouseClick(object sender, MouseEventArgs e)
         {
-            string szFile = TAB1_FILE_EXPLORER_TREEVIEW.SelectedNode.FullPath + "\\" + TAB1_FILE_LISTVIEW.SelectedItems[0].Text;
+            //string szFile = TAB1_FILE_EXPLORER_TREEVIEW.SelectedNode.FullPath + "\\" + TAB1_FILE_LISTVIEW.SelectedItems[0].Text;
 
-            FileInfo fileInfo = new FileInfo(szFile);
-            if (fileInfo.Exists)
+            //FileInfo fileInfo = new FileInfo(szFile);
+            //if (fileInfo.Exists)
+            //{
+            //    TAB1_PICTUREBOX.Image = Image.FromFile(szFile);
+            //}
+
+            if (e.Button.Equals(MouseButtons.Left))
             {
-                TAB1_PICTUREBOX.Image = Image.FromFile(szFile);
+                string szFile = TAB1_FILE_EXPLORER_TREEVIEW.SelectedNode.FullPath + "\\" + TAB1_FILE_LISTVIEW.SelectedItems[0].Text;
+
+                FileInfo fileInfo = new FileInfo(szFile);
+                if (fileInfo.Exists)
+                {
+                    TAB1_PICTUREBOX.Image = Image.FromFile(szFile);
+                }
+            }
+            else if (e.Button.Equals(MouseButtons.Right))
+            {
+                TAB1_CONTEXTMENUSTRIP.Items.Clear();
+                AddMenuItem(TAB1_CONTEXTMENUSTRIP, "RUn");
+                AddMenuItem(TAB1_CONTEXTMENUSTRIP, "CAncel");
+                AddMenuItem(TAB1_CONTEXTMENUSTRIP, "COpy");
+                AddMenuItem(TAB1_CONTEXTMENUSTRIP, "DElete");
+
+                TAB1_CONTEXTMENUSTRIP.Show(TAB1_FILE_LISTVIEW, e.Location);
             }
         }
 
@@ -267,6 +306,39 @@ namespace Image_Analysis
                 return thumbnail;
             }
             return null;
+        }
+
+        private void TAB1_FILE_EXPLORER_TREEVIEW_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button.Equals(MouseButtons.Right))
+            {
+                TAB1_CONTEXTMENUSTRIP.Items.Clear();
+                AddMenuItem(TAB1_CONTEXTMENUSTRIP, "Run");
+                AddMenuItem(TAB1_CONTEXTMENUSTRIP, "Cancel");
+                AddMenuItem(TAB1_CONTEXTMENUSTRIP, "Copy");
+                AddMenuItem(TAB1_CONTEXTMENUSTRIP, "Delete");
+
+                TAB1_CONTEXTMENUSTRIP.Show(TAB1_FILE_EXPLORER_TREEVIEW, e.Location);
+            }
+        }
+
+        private ToolStripMenuItem AddMenuItem(ContextMenuStrip cm, string text)
+        {
+            ToolStripMenuItem item = new ToolStripMenuItem(text);
+            cm.Items.Add(item);
+            return item;
+        }
+
+        private void TAB1_CONTEXTMENUSTRIP_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if(e.ClickedItem.Text.Equals("DElete"))
+            {
+                string szFile = TAB1_FILE_EXPLORER_TREEVIEW.SelectedNode.FullPath + "\\" + TAB1_FILE_LISTVIEW.SelectedItems[0].Text;
+                if(File.Exists(szFile))
+                {
+                    File.Delete(szFile);
+                }
+            }
         }
     }
 }
