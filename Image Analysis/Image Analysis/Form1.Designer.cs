@@ -189,7 +189,7 @@ namespace Image_Analysis
             // TAB1_CONTEXTMENUSTRIP
             // 
             this.TAB1_CONTEXTMENUSTRIP.Name = "TAB1_CONTEXTMENUSTRIP";
-            this.TAB1_CONTEXTMENUSTRIP.Size = new System.Drawing.Size(181, 26);
+            this.TAB1_CONTEXTMENUSTRIP.Size = new System.Drawing.Size(61, 4);
             this.TAB1_CONTEXTMENUSTRIP.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.TAB1_CONTEXTMENUSTRIP_ItemClicked);
             // 
             // Form1

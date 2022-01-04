@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Image_Analysis
 {
@@ -137,21 +131,6 @@ namespace Image_Analysis
             SettingListView(e.Node);
         }
 
-        private void DelayManual(int iDelay)
-        {
-            DateTime ThisMoment = DateTime.Now;
-            TimeSpan duration = new TimeSpan(0, 0, 0, 0, iDelay * 1000);
-
-            DateTime AfterTime = ThisMoment.Add(duration);
-            while(true)
-            {
-                ThisMoment = DateTime.Now;
-                System.Windows.Forms.Application.DoEvents();
-
-                if (AfterTime <= ThisMoment) break;
-            }
-        }
-
         private void TAB1_PICTUREBOX_MouseMove(object sender, MouseEventArgs e)
         {
             if (this.TAB1_PICTUREBOX.Image != null)
@@ -163,8 +142,6 @@ namespace Image_Analysis
                     this.TAB1_TEXTBOX_RGB.Location = new Point(e.X, e.Y);
                     this.TAB1_TEXTBOX_RGB.Text = $"R : {color.R} G : {color.G} B : {color.B}";
                     this.TAB1_TEXTBOX_RGB.Width = this.TAB1_TEXTBOX_RGB.PreferredSize.Width;
-
-                    DelayManual(5000);
                 }
                 catch (Exception)
                 {
@@ -174,14 +151,6 @@ namespace Image_Analysis
 
         private void TAB1_FILE_LISTVIEW_MouseClick(object sender, MouseEventArgs e)
         {
-            //string szFile = TAB1_FILE_EXPLORER_TREEVIEW.SelectedNode.FullPath + "\\" + TAB1_FILE_LISTVIEW.SelectedItems[0].Text;
-
-            //FileInfo fileInfo = new FileInfo(szFile);
-            //if (fileInfo.Exists)
-            //{
-            //    TAB1_PICTUREBOX.Image = Image.FromFile(szFile);
-            //}
-
             if (e.Button.Equals(MouseButtons.Left))
             {
                 string szFile = TAB1_FILE_EXPLORER_TREEVIEW.SelectedNode.FullPath + "\\" + TAB1_FILE_LISTVIEW.SelectedItems[0].Text;
@@ -219,8 +188,6 @@ namespace Image_Analysis
 
                 // 디렉토리에 존재하는 파일목록 보여주기
                 myImageList = new ImageList();
-                //FileInfo[] files = CheckImageFileNum(dirNode.FullPath);
-
                 DirectoryInfo dir = new DirectoryInfo(dirNode.FullPath);
                 FileInfo[] fis = dir.GetFiles();
                 if (CheckImageFileNum(fis) >= 5)
@@ -331,12 +298,17 @@ namespace Image_Analysis
 
         private void TAB1_CONTEXTMENUSTRIP_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            if(e.ClickedItem.Text.Equals("DElete"))
+            if (e.ClickedItem.Text.Equals("DElete"))
             {
                 string szFile = TAB1_FILE_EXPLORER_TREEVIEW.SelectedNode.FullPath + "\\" + TAB1_FILE_LISTVIEW.SelectedItems[0].Text;
-                if(File.Exists(szFile))
+                FileInfo fi = new FileInfo(szFile);
+                try
                 {
-                    File.Delete(szFile);
+                    fi.Delete();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("에러 발생 : " + ex.Message);
                 }
             }
         }
